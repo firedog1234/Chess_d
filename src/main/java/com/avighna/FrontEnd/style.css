@@ -1,0 +1,53 @@
+h1 {
+    text-align: center;
+}
+
+.square{
+    width: 79px;
+    height: 79px;
+    border: 1px solid black;
+    position: relative;
+}
+
+.piece{
+    position: absolute;
+    font-size: 52px;
+    bottom: 15px;
+    left: 24px;
+    cursor: pointer;
+}
+
+.letter{
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    color: black;
+}
+
+.number{
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 12px;
+    color: black;
+}
+
+.light{
+    background-color: antiquewhite;
+}
+
+.dark{
+    background-color: darkslategray;
+}
+
+#chessboard{
+    display: grid;
+    grid-template-columns: repeat(8,80px);
+    border: 2px solid black;
+    width: 641px;
+    margin: 0 auto;
+}
+
+
+
