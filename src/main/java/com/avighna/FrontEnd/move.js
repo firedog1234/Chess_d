@@ -101,10 +101,10 @@ function connectToWebSocket(){
     socket = new WebSocket("ws://localhost:8081");
 
     socket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        console.log("data recieved from websocket");
+        const data = event.data;
+        console.log("data recieved from websocket", data);
 
-        if(data.valid){
+        if(data === "OK"){
             const { sourceRow, sourceCol, targetRow, targetCol }  = data;
             runBoard[targetRow][targetCol] = runBoard[sourceRow][sourceCol];
             runBoard[sourceRow][sourceCol] = "";

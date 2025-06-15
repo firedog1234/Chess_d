@@ -15,4 +15,8 @@ public class Piece {
     public String getSymbol(){
         return symbol;
     }
+
+    public boolean validateMove(int sourceRow, int SourceColumn, int targetRow, int targetColumn){ throw new RuntimeException(); }
+
+
 }

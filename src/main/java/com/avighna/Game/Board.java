@@ -23,6 +23,12 @@ public class Board {
         board[row][col] = piece;
     }
 
+
+    public void movePiece(int sourceRow, int sourceCol, int targetRow, int targetCol){
+        this.setPiece(targetRow, targetCol, this.getPiece(sourceRow, sourceCol));
+        this.setPiece(sourceRow, sourceCol, null);
+    }
+
     private void initializeBoard(){
         board[0][0] = new Rook("black");
         board[0][1] = new Knight("black");
