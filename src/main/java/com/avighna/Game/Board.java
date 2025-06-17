@@ -29,6 +29,20 @@ public class Board {
         this.setPiece(sourceRow, sourceCol, null);
     }
 
+    public void printBoard(){
+        for(int i = 0; i < 8; i++){
+            for(int j = 0; j < 8; j++){
+                if(board[i][j] != null){
+                    System.out.print(board[i][j].getSymbol());
+                }
+                else{
+                    System.out.print("_");
+                }
+            }
+            System.out.println();
+        }
+    }
+
     private void initializeBoard(){
         board[0][0] = new Rook("black");
         board[0][1] = new Knight("black");

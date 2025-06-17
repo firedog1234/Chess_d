@@ -27,6 +27,8 @@ public class GameSession implements Runnable {
         boolean isValid = board.getPiece(sourceRow, sourceColumn).validateMove(sourceRow, sourceColumn, targetRow, targetColumn);
         board.movePiece(sourceRow,sourceColumn,targetRow,targetColumn);
 
+        board.printBoard();
+
         return isValid;
 
     }

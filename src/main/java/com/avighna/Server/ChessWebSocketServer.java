@@ -3,8 +3,8 @@ package com.avighna.Server;
 import com.avighna.APP.App;
 import com.avighna.Json.JsonHolder;
 import com.avighna.Game.*;
-
 import com.avighna.Manager.GameManager;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ChessWebSocketServer extends WebSocketServer {
@@ -59,10 +62,26 @@ public class ChessWebSocketServer extends WebSocketServer {
         holder.setTargetRow(root.get("targetRow").asInt());
         holder.setTargetCol(root.get("targetCol").asInt());
 
+        Map<String, Object> response = new HashMap<>();
+
         GameManager.getGameSession(webSocket);
         //write a .validate for a game session reagrding the board ig idk we have the json holder so we can prolly do sum
         if(GameManager.getGameSession(webSocket).validateAndMove(holder)){
-            webSocket.send("OK");
+            response.put("status", "OK");
+            response.put("sourceRow", holder.getSourceRow());
+            response.put("sourceColumn", holder.getSourceCol());
+            response.put("targetRow", holder.getTargetRow());
+            response.put("targetColumn", holder.getTargetCol());
+
+            ObjectMapper mapping =  new ObjectMapper();
+
+            try {
+                String jsonWebSocketSend = objectMapper.writeValueAsString(response);
+                webSocket.send(jsonWebSocketSend);
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
+
         }
         else{
             webSocket.send("NO");

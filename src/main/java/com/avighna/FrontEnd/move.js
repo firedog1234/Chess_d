@@ -100,20 +100,30 @@ function movePieces(){
 function connectToWebSocket(){
     socket = new WebSocket("ws://localhost:8081");
 
+
     socket.onmessage = (event) => {
-        const data = event.data;
-        console.log("data recieved from websocket", data);
+        try{
+            const data = JSON.parse(event.data);
+            console.log("data recieved from websocket", data);
 
-        if(data === "OK"){
-            const { sourceRow, sourceCol, targetRow, targetCol }  = data;
-            runBoard[targetRow][targetCol] = runBoard[sourceRow][sourceCol];
-            runBoard[sourceRow][sourceCol] = "";
+            if(data.status === "OK"){
+                let sourceRow = data.sourceRow;
+                let sourceCol = data.sourceColumn
+                let targetRow = data.targetRow;
+                let targetCol = data.targetColumn;
 
-            drawInitialBoard(runBoard);
-            movePieces();
-        } else{
-            console.log("oh no");
+                runBoard[targetRow][targetCol] = runBoard[sourceRow][sourceCol];
+                runBoard[sourceRow][sourceCol] = "";
+
+                drawInitialBoard(runBoard);
+                movePieces();
+            } else{
+                console.log("oh no");
+            }
+        } catch (e){
+            console.log("Non-JSON message received:", event.data);
         }
+
     }
 
 }
