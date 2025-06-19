@@ -1,4 +1,4 @@
-package BotCaller;
+package com.avighna.BotCaller;
 
 import com.avighna.Game.*;
 
