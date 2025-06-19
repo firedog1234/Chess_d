@@ -25,6 +25,7 @@ import java.util.Map;
 public class ChessWebSocketServer extends WebSocketServer {
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
+
     public ChessWebSocketServer(InetSocketAddress address){
         super(address);
     }

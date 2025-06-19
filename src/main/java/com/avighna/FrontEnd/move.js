@@ -73,7 +73,10 @@ function movePieces(){
 
             e.preventDefault();
 
-            if(draggedPiece === null) return;
+            if(draggedPiece === null || draggedPiece.innerText === "♟" || draggedPiece.innerText === "♜" || draggedPiece.innerText === "♞"
+            || draggedPiece.innerText === "♝" || draggedPiece.innerText === "♛" || draggedPiece.innerText === "♚"){
+                return;
+            }
 
             const targetSquare = e.currentTarget;
             const targetRow = parseInt(targetSquare.dataset.row);

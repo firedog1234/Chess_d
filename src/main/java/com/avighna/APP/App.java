@@ -18,7 +18,7 @@ public class App {
         HTTPserver.initializeServer();
         logger.info("HTTP Server Started");
         webSocket.start();
-        logger.info("WebSocker started");
+        logger.info("WebSocket started");
 
 
     }

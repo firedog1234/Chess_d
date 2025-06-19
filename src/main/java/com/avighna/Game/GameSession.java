@@ -13,9 +13,11 @@ public class GameSession implements Runnable {
     //run the game stuff;
     private static final Logger logger = LoggerFactory.getLogger(App.class);
     private final WebSocket connection;
+    private boolean isBlacksMove = false;
     private Board board;
     public GameSession(WebSocket connection){
         this.connection = connection;
+        this.board = new Board();
     }
 
     public boolean validateAndMove(JsonHolder holder){
@@ -26,6 +28,8 @@ public class GameSession implements Runnable {
 
         boolean isValid = board.getPiece(sourceRow, sourceColumn).validateMove(sourceRow, sourceColumn, targetRow, targetColumn);
         board.movePiece(sourceRow,sourceColumn,targetRow,targetColumn);
+        setBlacksMove(true);
+
 
         board.printBoard();
 
@@ -37,10 +41,24 @@ public class GameSession implements Runnable {
         connection.send("you just connected i think");
         logger.info("run is ran");
 
-        this.board = new Board();
+        MoveStorer store = new MoveStorer();
+
+
+
+        if(isBlacksMove){
+
+        }
+
 
 
 
     }
 
+    public boolean isBlacksMove() {
+        return isBlacksMove;
+    }
+
+    public void setBlacksMove(boolean blacksMove) {
+        isBlacksMove = blacksMove;
+    }
 }
