@@ -1,5 +1,6 @@
 package com.avighna.Game;
 import com.avighna.APP.App;
+import com.avighna.Pair;
 import org.java_websocket.WebSocket;
 import com.avighna.Json.*;
 
@@ -13,7 +14,7 @@ public class GameSession implements Runnable {
     //run the game stuff;
     private static final Logger logger = LoggerFactory.getLogger(App.class);
     private final WebSocket connection;
-    private boolean isBlacksMove = false;
+    private boolean isBlacksMove = true;
     private Board board;
     public GameSession(WebSocket connection){
         this.connection = connection;
@@ -46,7 +47,10 @@ public class GameSession implements Runnable {
 
 
         if(isBlacksMove){
-
+            logger.info("it is blacks move\n");
+            Pair<Board, MoveStorer> p = new Pair<>(board,store);
+            HoldingQueue.addRequest(p);
+            logger.info(p.second.getBestMove());
         }
 
 

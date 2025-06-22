@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class GameManager {
 
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameManager.class);
     private static ConcurrentHashMap<WebSocket, GameSession> games = new ConcurrentHashMap<>();
 
     public static void addGameSession(WebSocket webSocket, GameSession gameSession){

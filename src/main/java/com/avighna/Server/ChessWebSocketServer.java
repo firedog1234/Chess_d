@@ -4,6 +4,7 @@ import com.avighna.APP.App;
 import com.avighna.Json.JsonHolder;
 import com.avighna.Game.*;
 import com.avighna.Manager.GameManager;
+import com.avighna.BotCaller.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 
 public class ChessWebSocketServer extends WebSocketServer {
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger logger = LoggerFactory.getLogger(ChessWebSocketServer.class);
 
 
     public ChessWebSocketServer(InetSocketAddress address){
@@ -35,7 +36,10 @@ public class ChessWebSocketServer extends WebSocketServer {
         GameSession gameSession = new GameSession(webSocket);
         GameManager.addGameSession(webSocket, gameSession);
         Thread gameThread = new Thread(gameSession);
+        BotCaller stockfish = new BotCaller();
+        Thread stockFishThread = new Thread(stockfish);
         gameThread.start();
+        stockFishThread.start();
         webSocket.send("you connected");
         logger.info("game session: {}", webSocket.getRemoteSocketAddress());
     }
