@@ -12,9 +12,9 @@ public class GameSession implements Runnable {
 
 
     //run the game stuff;
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger logger = LoggerFactory.getLogger(GameSession.class);
     private final WebSocket connection;
-    private boolean isBlacksMove = true;
+    private boolean isBlacksMove = false;
     private Board board;
     public GameSession(WebSocket connection){
         this.connection = connection;
@@ -34,6 +34,8 @@ public class GameSession implements Runnable {
 
         board.printBoard();
 
+        logger.info(this.isBlacksMove() + "");
+
         return isValid;
 
     }
@@ -46,11 +48,24 @@ public class GameSession implements Runnable {
 
 
 
-        if(isBlacksMove){
-            logger.info("it is blacks move\n");
-            Pair<Board, MoveStorer> p = new Pair<>(board,store);
-            HoldingQueue.addRequest(p);
-            logger.info(p.second.getBestMove());
+        while (true) {
+            if (this.isBlacksMove()) {
+                logger.info("it is blacks move\n");
+                Pair<Board, MoveStorer> p = new Pair<>(board, store);
+                HoldingQueue.addRequest(p);
+                setBlacksMove(false);
+                logger.info("about to wait for a best move response from stockfish\n");
+                store.waitForMove();
+                logger.info("best move: " + p.second.getBestMove());
+                store.setEngineRan(false);
+            }
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                break;
+            }
         }
 
 

@@ -11,7 +11,7 @@ public class ChessHTTPServer{
         HttpServer chessHttpServer = HttpServer.create(new InetSocketAddress("localhost", 8080), 0);
 
         chessHttpServer.createContext("/", new FrontServerHandler());
-        chessHttpServer.setExecutor(Executors.newFixedThreadPool(2));
+        chessHttpServer.setExecutor(Executors.newFixedThreadPool(10));
 
         chessHttpServer.start();
 

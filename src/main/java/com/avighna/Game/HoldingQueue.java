@@ -13,7 +13,7 @@ public class HoldingQueue {
     private static Queue<Pair<Board, MoveStorer>> moveQueueRequests = new LinkedList<>();
 
     public static synchronized void addRequest(Pair<Board, MoveStorer> p){
-        logger.info("request added\n");
+        logger.info("request added to the queue\n");
         moveQueueRequests.add(p);
     }
 
