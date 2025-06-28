@@ -1,10 +1,12 @@
 package com.avighna.Game;
 
+
 import com.avighna.Manager.GameManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
+import com.avighna.Pair;
 
 public class MoveStorer {
 
@@ -12,6 +14,11 @@ public class MoveStorer {
 
     private String bestMove;
     private boolean engineRan = false;
+
+    private Pair<Integer, Integer> startingSquare;
+
+    private Pair<Integer, Integer> endingSquare;
+
 
     public boolean isEngineRan() {
         return engineRan;
@@ -25,8 +32,27 @@ public class MoveStorer {
         return bestMove;
     }
 
+    public Pair<Integer, Integer> getStartingSquare() {
+        return startingSquare;
+    }
+
+    public void setStartingSquare(Pair<Integer, Integer> startingSquare) {
+        this.startingSquare = startingSquare;
+    }
+
+    public Pair<Integer, Integer> getEndingSquare() {
+        return endingSquare;
+    }
+
+    public void setEndingSquare(Pair<Integer, Integer> endingSquare) {
+        this.endingSquare = endingSquare;
+    }
+
     public synchronized void setBestMove(String bestMove) {
         this.bestMove = bestMove.substring(9,13);;
+        convertMove(this.bestMove);
+        startingSquare.logMove();
+        endingSquare.logMove();
         logger.info("about to notify");
         notify();
         logger.info("notify complete");
@@ -55,7 +81,19 @@ public class MoveStorer {
         alphaMap.put("g", 6);
         alphaMap.put("h", 7);
 
+        Integer fromRow;
+        Integer fromCol;
+        Integer toRow;
+        Integer toCol;
 
+        fromRow = Integer.parseInt(bestMove.substring(1,2));
+        fromCol = alphaMap.get(bestMove.substring(0,1));
+
+        toRow = Integer.parseInt(bestMove.substring(3));
+        toCol = alphaMap.get(bestMove.substring(2,3));
+
+        setStartingSquare(new Pair<Integer, Integer>(fromRow, fromCol));
+        setEndingSquare(new Pair<Integer, Integer>(toRow, toCol));
 
 
     }
