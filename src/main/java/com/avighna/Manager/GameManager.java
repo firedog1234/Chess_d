@@ -14,6 +14,7 @@ public class GameManager {
     private static ConcurrentHashMap<WebSocket, GameSession> games = new ConcurrentHashMap<>();
 
     public static void addGameSession(WebSocket webSocket, GameSession gameSession){
+        logger.info("adding a gamesession");
         games.put(webSocket, gameSession);
 
     }
@@ -23,6 +24,7 @@ public class GameManager {
     }
 
     public static void removeGameSession(WebSocket webSocket){
+        logger.info("removing a game session");
         games.remove(webSocket);
     }
 

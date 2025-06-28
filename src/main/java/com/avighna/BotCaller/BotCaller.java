@@ -137,7 +137,7 @@ public class BotCaller implements Runnable {
         while (true) {
             //logger.info("bot caller is running\n");
             if (HoldingQueue.getSize() > 0) {
-                logger.info("borcaller is gonna deque a request\n");
+                logger.info("botCaller is gonna deque a request\n");
                 Pair<Board, MoveStorer> pair = HoldingQueue.dequeueRequest();
 
                 ProcessBuilder pb = new ProcessBuilder("stockfish");

@@ -38,14 +38,17 @@ public class ChessWebSocketServer extends WebSocketServer {
         Thread gameThread = new Thread(gameSession);
         BotCaller stockfish = new BotCaller();
         Thread stockFishThread = new Thread(stockfish);
+        stockFishThread.setName("stockFishThread");
         gameThread.start();
         stockFishThread.start();
         webSocket.send("you connected");
         logger.info("game session: {}", webSocket.getRemoteSocketAddress());
+
     }
 
     @Override
     public void onClose(WebSocket webSocket, int i, String s, boolean b) {
+        GameManager.removeGameSession(webSocket);
         logger.info("game session closed: {}", webSocket.getRemoteSocketAddress());
     }
 
