@@ -1,5 +1,6 @@
 package com.avighna.APP;
 import com.avighna.Server.*;
+import com.avighna.Game.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,6 +15,7 @@ public class App {
 
         ChessHTTPServer HTTPserver = new ChessHTTPServer();
         ChessWebSocketServer webSocket = new ChessWebSocketServer(new InetSocketAddress("localhost", 8081));
+        GameSession.setServer(webSocket);
 
         HTTPserver.initializeServer();
         logger.info("HTTP Server Started");

@@ -6,6 +6,7 @@ import com.avighna.Game.*;
 import com.avighna.Manager.GameManager;
 import com.avighna.BotCaller.*;
 
+import com.avighna.Pair;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,6 +18,7 @@ import org.java_websocket.server.WebSocketServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.net.InetSocketAddress;
 
 import java.util.HashMap;
@@ -25,6 +27,24 @@ import java.util.Map;
 
 public class ChessWebSocketServer extends WebSocketServer {
     private static final Logger logger = LoggerFactory.getLogger(ChessWebSocketServer.class);
+
+    public void sendBlackMove(Pair<Integer, Integer> startingSquare, Pair<Integer, Integer> endingSquare, WebSocket webSocket) throws JsonProcessingException {
+        JsonHolder jsonHolder = new JsonHolder();
+        HashMap<String, Integer> sendMap = new HashMap<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+        GameManager.getGameSession(webSocket);
+
+        sendMap.put("blacksMove", null);
+        sendMap.put("rowFrom", startingSquare.first);
+        sendMap.put("colFrom", startingSquare.second);
+        sendMap.put("rowTo", endingSquare.first);
+        sendMap.put("colTo", endingSquare.second);
+
+        String jsonWebSocketSend = objectMapper.writeValueAsString(sendMap);
+        webSocket.send(jsonWebSocketSend);
+
+    }
+
 
 
     public ChessWebSocketServer(InetSocketAddress address){

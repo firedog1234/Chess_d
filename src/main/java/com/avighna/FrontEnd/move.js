@@ -109,6 +109,19 @@ function connectToWebSocket(){
             const data = JSON.parse(event.data);
             console.log("data recieved from websocket", data);
 
+            if(data.blacksMove === null){
+                let fromRow = 8-data.rowFrom;
+                let fromCol = data.colFrom;
+                let toRow = 8-data.rowTo;
+                let toCol = data.colTo;
+
+                runBoard[toRow][toCol] = runBoard[fromRow][fromCol];
+                runBoard[fromRow][fromCol] = "";
+
+                drawInitialBoard(runBoard);
+                movePieces();
+            }
+
             if(data.status === "OK"){
                 let sourceRow = data.sourceRow;
                 let sourceCol = data.sourceColumn
@@ -126,6 +139,7 @@ function connectToWebSocket(){
         } catch (e){
             console.log("Non-JSON message received:", event.data);
         }
+
 
     }
 
