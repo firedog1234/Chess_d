@@ -1,12 +1,12 @@
 package com.avighna.Game;
 
-public class Knight extends Piece{
-    Knight(String color){
-        super(color.equals("white") ? "♘" : "♞" ,color);
-    }
+public class Knight extends Piece {
+  public Knight(PieceColor color) {
+    super(PieceType.KNIGHT, color);
+  }
 
-    public boolean validateMove(int sourceRow, int SourceColumn, int targetRow, int targetColumn){
-        return true;
-    }
-
+  @Override
+  public boolean isValidMove(Position from, Position to, Board board) {
+    return true;
+  }
 }

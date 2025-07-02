@@ -1,42 +1,40 @@
 package com.avighna.Json;
 
-
-
 public class JsonHolder {
-    private int sourceRow;
-    private int sourceCol;
-    private int targetRow;
-    private int targetCol;
+  private int sourceRow;
+  private int sourceCol;
+  private int targetRow;
+  private int targetCol;
 
-    public int getSourceRow() {
-        return sourceRow;
-    }
-    public void setSourceRow(int sourceRow) {
-        this.sourceRow = sourceRow;
-    }
+  public int getSourceRow() {
+    return sourceRow;
+  }
 
-    public int getSourceCol() {
-        return sourceCol;
-    }
+  public void setSourceRow(int sourceRow) {
+    this.sourceRow = sourceRow;
+  }
 
-    public void setSourceCol(int sourceCol) {
-        this.sourceCol = sourceCol;
-    }
+  public int getSourceCol() {
+    return sourceCol;
+  }
 
-    public int getTargetRow() {
-        return targetRow;
-    }
+  public void setSourceCol(int sourceCol) {
+    this.sourceCol = sourceCol;
+  }
 
-    public void setTargetRow(int targetRow) {
-        this.targetRow = targetRow;
-    }
+  public int getTargetRow() {
+    return targetRow;
+  }
 
-    public int getTargetCol() {
-        return targetCol;
-    }
+  public void setTargetRow(int targetRow) {
+    this.targetRow = targetRow;
+  }
 
-    public void setTargetCol(int targetCol) {
-        this.targetCol = targetCol;
-    }
+  public int getTargetCol() {
+    return targetCol;
+  }
 
+  public void setTargetCol(int targetCol) {
+    this.targetCol = targetCol;
+  }
 }

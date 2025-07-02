@@ -1,12 +1,12 @@
 package com.avighna.Game;
 
-public class King extends Piece{
-    King(String color){
-        super(color.equals("white") ? "♔" : "♚" ,color);
-    }
+public class King extends Piece {
+  public King(PieceColor color) {
+    super(PieceType.KING, color);
+  }
 
-    public boolean validateMove(int sourceRow, int SourceColumn, int targetRow, int targetColumn){
-        return true;
-    }
-
+  @Override
+  public boolean isValidMove(Position from, Position to, Board board) {
+    return true;
+  }
 }

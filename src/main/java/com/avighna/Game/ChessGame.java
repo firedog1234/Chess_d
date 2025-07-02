@@ -1,4 +1,3 @@
 package com.avighna.Game;
 
-public class ChessGame {
-}
+public class ChessGame {}
